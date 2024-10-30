@@ -1,0 +1,8 @@
+env/
+
+
+**/migrations/*.py
+**/migrations/*.pyc
+
+
+Pipfile.lock
