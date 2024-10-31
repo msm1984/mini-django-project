@@ -1,0 +1,26 @@
+# Ignore Python cache and virtual environment files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+
+
+env/
+
+
+*.sqlite3
+*.log
+*.ini
+*.env
+*.cfg
+*.local
+
+
+# Ignore Docker-related files that shouldn’t be included in the image
+.dockerignore
+Dockerfile
+
+# Ignore Git files
+.git
+.gitignore
