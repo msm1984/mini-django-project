@@ -1,12 +1,29 @@
-FROM python:alpine
+FROM python:3.10-alpine as builder
+
 
 RUN apk update && \
     apk add --no-cache postgresql-dev gcc python3-dev musl-dev
 
+
+WORKDIR /app
+
+
 COPY requirements.txt .
+RUN pip wheel --no-cache-dir --wheel-dir /app/wheels -r requirements.txt
 
 
-RUN pip install --no-cache-dir -r requirements.txt
+FROM python:3.10-alpine
+
+
+RUN apk update && \
+    apk add --no-cache libpq
+
+
+WORKDIR /app
+
+
+COPY --from=builder /app/wheels /wheels
+RUN pip install --no-cache /wheels/*
 
 
 COPY . .
