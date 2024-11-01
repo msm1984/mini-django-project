@@ -18,7 +18,7 @@ services:
       retries: 5
 
   web:
-    image: mohammadsadeghmontazeri/mini-django:v0.2.3
+    image: mohammadsadeghmontazeri/mini-django:v0.2.5
     command: >
       sh -c "python manage.py makemigrations &&
              python manage.py migrate &&
