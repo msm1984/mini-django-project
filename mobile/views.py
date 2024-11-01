@@ -12,29 +12,29 @@ from .serializers import *
 class InformationViewSet(ModelViewSet):
 
 
-    queryset = MoblieInfo.objects.all()
+    queryset = MobileInfo.objects.all()
     serializer_class = InformationSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_class = MobileFilter
 
-    search_fields = ['Nationality', 'Name']
+    search_fields = ['nationality', 'name']
 
     
 
     def get_queryset(self):
-        # Retrieve column names from query parameters
+        
         column1 = self.request.query_params.get('column1')
         column2 = self.request.query_params.get('column2')
         
-        # Get the initial queryset with filters, search, and ordering applied
+        
         queryset = super().get_queryset()
         
-        # Apply the dynamic column comparison if both columns are provided
+        
         if column1 and column2:
-            # Validate that the provided columns exist in the model
-            if not hasattr(MoblieInfo, column1) or not hasattr(MoblieInfo, column2):
-                raise ValidationError("Invalid column names provided for comparison.")
+            
+            if not hasattr(MobileInfo, column1) or not hasattr(MobileInfo, column2):
+                raise ValidationError({"type":"Invalid column names provided for comparison."})
             queryset = queryset.filter(**{f"{column1}": F(column2)})
         
         return queryset

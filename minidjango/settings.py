@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
@@ -100,7 +101,7 @@ WSGI_APPLICATION = 'minidjango.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-'''DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'minidb', 
@@ -109,10 +110,10 @@ WSGI_APPLICATION = 'minidjango.wsgi.application'
         'HOST': '127.0.0.1', 
         'PORT': '5432',
     }
-}'''
+}
 
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.getenv('DATABASE_NAME'),
@@ -121,7 +122,7 @@ DATABASES = {
         'HOST': os.getenv('DATABASE_HOST'),
         'PORT': os.getenv('DATABASE_PORT'),
     }
-}
+}'''
 
 
 # Password validation
@@ -168,7 +169,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DJOSER = {
     'SERIALIZERS': {
         'user_create':'core.serializers.UserCreateSerializer',
-        'current_user':'core.serializers.myUserSerializer'
+        'current_user':'core.serializers.myUserSerializer',
     }
 }
 
