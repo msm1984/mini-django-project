@@ -15,7 +15,7 @@ RUN pip wheel --no-cache-dir --wheel-dir /app/wheels -r requirements.txt
 # Stage 2: Final image stage
 FROM python:3.10-alpine
 
-# Install runtime dependencies
+
 RUN apk update && \
     apk add --no-cache libpq
 
