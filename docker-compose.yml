@@ -13,7 +13,7 @@ services:
       - django_network
 
   web:
-    image: mohammadsadeghmontazeri/mini-django:v0.1.0
+    image: mohammadsadeghmontazeri/mini-django:v0.2.1
     ports:
       - "8000:8000"
     environment:
