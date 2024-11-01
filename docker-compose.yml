@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    image: postgres:13
+    image: postgres:15
     environment:
       POSTGRES_DB: mydatabase
       POSTGRES_USER: myuser
@@ -11,9 +11,14 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - django_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser -d mydatabase"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   web:
-    image: mohammadsadeghmontazeri/mini-django:v0.2.1
+    image: mohammadsadeghmontazeri/mini-django:v0.2.2
     ports:
       - "8000:8000"
     environment:
@@ -23,7 +28,8 @@ services:
       - DATABASE_HOST=db
       - DATABASE_PORT=5432
     depends_on:
-      - db
+      db:
+        condition: service_healthy  # Only start when db is healthy
     networks:
       - django_network
 
